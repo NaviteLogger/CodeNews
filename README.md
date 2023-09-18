@@ -49,6 +49,8 @@ Follow these steps to set up and run CodeNews on your local machine.
     ```
 ### Install Dependencies
 
+1. Install project dependencies:
+
     ```bash
     pip install -r requirements.txt
     ```
