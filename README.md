@@ -47,12 +47,12 @@ Follow these steps to set up and run CodeNews on your local machine.
     ```bash
     source venv/bin/activate
     ```
-5. Install project dependencies:
+### Install Dependencies
 
     ```bash
     pip install -r requirements.txt
     ```
-### Configuration
+### Database Setup
 
 1. Configure your MySQL database settings in `config.py`. Update the following fields with your database information:
 
