@@ -34,26 +34,30 @@ Follow these steps to set up and run CodeNews on your local machine.
 
 2. Navigate to the project directory:
 
-    ```bash
-    cd CodeNews
-    ```
+   ```bash
+   cd CodeNews
+   ```
+
 3. Create a virtual environment (optional):
 
-    ```bash
-    python -m venv venv
-    ```
+   ```bash
+   python -m venv venv
+   ```
+
 4. Activate the virtual environment:
 
-    ```bash
-    source venv/bin/activate
-    ```
+   ```bash
+   source venv/bin/activate
+   ```
+
 ### Install Dependencies
 
 1. Install project dependencies:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ### Database Setup
 
 1. Configure your MySQL database settings in `config.py`. Update the following fields with your database information:
@@ -72,3 +76,25 @@ DB_CONFIG = {
 ```bash
 python init_db.py
 ```
+
+## Usage
+
+### Running the Web Scrapper:
+
+1. Start the web scraping component to collect news articles:
+
+```bash
+python scraper.py
+```
+
+This script will periodically scrape news articles from selected sources and store them in the MySQL database for further processing.
+
+2. Access the summarized news articles through your preferred frontend or API, which you can develop based on the project's needs.
+
+## Contributing
+
+Contributions are welcome! Feel free to submit issues, suggest improvements, or make pull requests to help enhance this project.
+
+## License
+
+
