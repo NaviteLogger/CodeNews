@@ -7,3 +7,6 @@ from config import DB_CONFIG
 def scrape_and_store_news():
     # Create a database connection
     connection = mysql.connector.connect(**DB_CONFIG)
+
+    # Create a cursor - a middleware between the database and the application
+    cursor = connection.cursor()
