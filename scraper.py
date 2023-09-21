@@ -22,4 +22,6 @@ def scrape_and_store_news():
 
             #Check if the request was successful
             if response.status == '200':
-                
+
+                #Parse the response using BeautifulSoup
+                soup = BeautifulSoup(response.text, 'html.parser')
