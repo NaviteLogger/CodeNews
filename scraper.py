@@ -8,6 +8,17 @@ def scrape_and_store_google_news():
     # Google News URL
     google_news_url = "https://news.google.com"
 
+    try:
+        #Create a database connection
+        connection = mysql.connector.connect(**DB_CONFIG)
+
+        #Create a cursor - a middleware between the database and the application
+        cursor = connection.cursor()
+
+    except Exception as e:
+        print("Error occurred while scraping: ", e)
+
+
 # This function will scrape and store news articles from the specified URL
 def scrape_and_store_news():
     # Create a database connection
