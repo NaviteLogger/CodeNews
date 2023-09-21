@@ -34,6 +34,15 @@ try:
     # Execute the SQL statements to create the table
     cursor.execute(create_scrape_sources_urls_table_query)
 
+    create_user_preferences_table_query = """
+    CREATE TABLE IF NOT EXISTS user_preferences (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    language VARCHAR(255) NOT NULL,
+    );
+    """
+
 except Exception as e:
     print("Error occurred while initializing the database schema: ", e)
 
