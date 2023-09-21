@@ -16,6 +16,10 @@ def scrape_and_store_google_news(user_id):
         # Create a cursor - a middleware between the database and the application
         cursor = connection.cursor()
 
+        #Fetch the user's preferences from the database by user_id
+        cursor.execute("SELECT topic, language FROM user_preferences WHERE user_id = %s", (user_id,))
+        user_preferences = cursor.fetchall()
+
         # Send a HTTP GET request to the Google News URL
         response = requests.get(google_news_url)
         print("The HTTP GET request status is: ", response.status_code)
