@@ -21,13 +21,21 @@ def scrape_and_store_google_news():
         print("The HTTP GET request status is: ", response.status_code)
 
         # Check if the request was successful
-        if(response.code == '200'):
-
+        if response.code == "200":
             # Parse the response using BeautifulSoup
             soup = BeautifulSoup(response.text, "html.parser")
 
-            articles =  soup.find_all("article")
+            # Find all the news articles on the Google News front page
+            articles = soup.find_all("article")
 
+            for article in articles:
+                # Extract the article information (customize as needed)
+                title = article.find("h3").text
+                author = article.find("a", class_="wEwyrc").text
+                date_published = article.find("time")["datetime"]
+                source = article.find("a", class_="VDXfz").get("href")
+                content = article.find("div", class_="xrnccd").text
+                
 
     except Exception as e:
         print("Error occurred while scraping: ", e)
@@ -60,8 +68,8 @@ def scrape_and_store_news():
                 title = soup.find("h1", class_="article-title").text
                 author = soup.find("span", class_="author-name").text
                 date_published = soup.find("span", class_="date").text
-                content = soup.find("div", class_="article-body").text
                 source = source_url
+                content = soup.find("div", class_="article-body").text
 
                 # Insert the article into the database
                 cursor.execute(
