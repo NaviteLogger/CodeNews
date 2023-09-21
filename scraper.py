@@ -10,3 +10,7 @@ def scrape_and_store_news():
 
     # Create a cursor - a middleware between the database and the application
     cursor = connection.cursor()
+
+    #Retrieve the source name and URL from the database
+    cursor.execute("SELECT source_name, source_url FROM scrape_sources_urls")
+    sources = cursor.fetchall()
