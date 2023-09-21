@@ -29,6 +29,8 @@ def scrape_and_store_google_news(user_id):
 
             # Check if the request was successful
             if response.status_code == 200:
+                # Parse the response using BeautifulSoup
+                soup = BeautifulSoup(response.text, "html.parser")
 
         # Send a HTTP GET request to the Google News URL
         response = requests.get(google_news_url)
