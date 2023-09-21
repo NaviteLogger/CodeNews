@@ -20,6 +20,10 @@ def scrape_and_store_google_news():
         response = requests.get(google_news_url)
         print("The HTTP GET request status is: ", response.status_code)
 
+        # Check if the request was successful
+        if(response.code == '200'):
+
+
     except Exception as e:
         print("Error occurred while scraping: ", e)
 
