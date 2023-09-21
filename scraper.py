@@ -3,20 +3,22 @@ from bs4 import BeautifulSoup
 import mysql.connector
 from config import DB_CONFIG
 
-#This function will scrape and store news articles from the Google News
+
+# This function will scrape and store news articles from the Google News
 def scrape_and_store_google_news():
     # Google News URL
     google_news_url = "https://news.google.com"
 
     try:
-        #Create a database connection
+        # Create a database connection
         connection = mysql.connector.connect(**DB_CONFIG)
 
-        #Create a cursor - a middleware between the database and the application
+        # Create a cursor - a middleware between the database and the application
         cursor = connection.cursor()
 
-        #Send a HTTP GET request to the Google News URL
+        # Send a HTTP GET request to the Google News URL
         response = requests.get(google_news_url)
+        print("The HTTP GET request status is: ", response.status_code)
 
     except Exception as e:
         print("Error occurred while scraping: ", e)
@@ -38,6 +40,7 @@ def scrape_and_store_news():
         try:
             # Send a HTTP GET request to the URL
             response = requests.get(source_url)
+            print("The HTTP GET request status is: ", response.status_code)
 
             # Check if the request was successful
             if response.status == "200":
