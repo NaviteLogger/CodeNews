@@ -15,6 +15,9 @@ def scrape_and_store_google_news():
         #Create a cursor - a middleware between the database and the application
         cursor = connection.cursor()
 
+        #Send a HTTP GET request to the Google News URL
+        response = requests.get(google_news_url)
+
     except Exception as e:
         print("Error occurred while scraping: ", e)
 
