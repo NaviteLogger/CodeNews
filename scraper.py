@@ -21,7 +21,7 @@ def scrape_and_store_google_news():
         print("The HTTP GET request status is: ", response.status_code)
 
         # Check if the request was successful
-        if response.code == "200":
+        if response.code == 200:
             # Parse the response using BeautifulSoup
             soup = BeautifulSoup(response.text, "html.parser")
 
@@ -86,7 +86,7 @@ def scrape_and_store_news():
             print("The HTTP GET request status is: ", response.status_code)
 
             # Check if the request was successful
-            if response.status == "200":
+            if response.status == 200:
                 # Parse the response using BeautifulSoup
                 soup = BeautifulSoup(response.text, "html.parser")
 
