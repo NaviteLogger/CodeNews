@@ -5,7 +5,7 @@ from config import DB_CONFIG
 
 
 # This function will scrape and store news articles from the Google News
-def scrape_and_store_google_news():
+def scrape_and_store_google_news(user_id):
     # Google News URL
     google_news_url = "https://news.google.com"
 
