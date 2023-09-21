@@ -44,3 +44,9 @@ def scrape_and_store_news():
 
         except Exception as e:
             print("Error occurred while scraping: ", e)
+
+    # Close the cursor
+    cursor.close()
+
+    #Close the connection
+    connection.close()
