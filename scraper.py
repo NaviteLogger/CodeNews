@@ -32,6 +32,17 @@ def scrape_and_store_google_news(user_id):
                 # Parse the response using BeautifulSoup
                 soup = BeautifulSoup(response.text, "html.parser")
 
+                # Find all the news articles on the Google News front page
+                articles = soup.find_all("article")
+
+                for article in articles:
+                    # Extract the article information (customize as needed)
+                    title = article.find("h3").text
+                    author = article.find("a", class_="wEwyrc").text
+                    date_published = article.find("time")["datetime"]
+                    source = article.find("a", class_="VDXfz").get("href")
+
+
         # Send a HTTP GET request to the Google News URL
         response = requests.get(google_news_url)
         print("The HTTP GET request status is: ", response.status_code)
@@ -47,7 +58,7 @@ def scrape_and_store_google_news(user_id):
             for article in articles:
                 # Extract the article information (customize as needed)
                 title = article.find("h3").text
-                author = article.find("a", class_="wEwyrc ").text
+                author = article.find("a", class_="wEwyrc").text
                 date_published = article.find("time")["datetime"]
                 source = article.find("a", class_="VDXfz").get("href")
 
