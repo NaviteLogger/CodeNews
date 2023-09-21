@@ -23,6 +23,11 @@ def scrape_and_store_google_news():
         # Check if the request was successful
         if(response.code == '200'):
 
+            # Parse the response using BeautifulSoup
+            soup = BeautifulSoup(response.text, "html.parser")
+
+            # Extract article information (customize as needed)
+            
 
     except Exception as e:
         print("Error occurred while scraping: ", e)
