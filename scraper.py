@@ -27,6 +27,9 @@ def scrape_and_store_google_news(user_id):
             # Send a HTTP GET request to the Google News URL
             response = requests.get(google_news_topic_url)
 
+            # Check if the request was successful
+            if response.status_code == 200:
+
         # Send a HTTP GET request to the Google News URL
         response = requests.get(google_news_url)
         print("The HTTP GET request status is: ", response.status_code)
