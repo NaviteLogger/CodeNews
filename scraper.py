@@ -17,7 +17,10 @@ def scrape_and_store_google_news(user_id):
         cursor = connection.cursor()
 
         # Fetch the user's preferences from the database by user_id
-        cursor.execute("SELECT topic, language FROM user_preferences WHERE user_id = %s", (user_id,))
+        cursor.execute(
+            "SELECT topic, language FROM user_preferences WHERE user_id = %s",
+            (user_id,),
+        )
         user_preferences = cursor.fetchall()
 
         for topic, language in user_preferences:
@@ -48,23 +51,23 @@ def scrape_and_store_google_news(user_id):
                     # Insert the article into the database
                     cursor.execute(
                         "INSERT INTO news_articles (title, author, date_published, source) VALUES (%s, %s, %s, %s)",
-                        (title, author, date_published, source),
+                        (title, author, date_published, article_url),
                     )
 
-                # Commit the changes to the database
-                connection.commit()
+                    # Commit the changes to the database
+                    connection.commit()
 
-                # Print the article information
-                print(
-                    "Article title: ",
-                    title,
-                    "\nArticle author: ",
-                    author,
-                    "\nDate published: ",
-                    date_published,
-                    "\nSource: ",
-                    source,
-                )
+                    # Print the article information
+                    print(
+                        "Article title: ",
+                        title,
+                        "\nArticle author: ",
+                        author,
+                        "\nDate published: ",
+                        date_published,
+                        "\nSource: ",
+                        source,
+                    )
 
     except Exception as e:
         print("Error occurred while scraping: ", e)
