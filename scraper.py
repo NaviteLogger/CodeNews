@@ -14,3 +14,12 @@ def scrape_and_store_news():
     #Retrieve the source name and URL from the database
     cursor.execute("SELECT source_name, source_url FROM scrape_sources_urls")
     sources = cursor.fetchall()
+
+    for source_name, source_url in sources:
+        try:
+            #Send a HTTP GET request to the URL
+            response = requests.get(source_url)
+
+            #Check if the request was successful
+            if response.status == '200':
+                
