@@ -31,14 +31,40 @@ def scrape_and_store_google_news():
             for article in articles:
                 # Extract the article information (customize as needed)
                 title = article.find("h3").text
-                author = article.find("a", class_="wEwyrc").text
+                author = article.find("a", class_="wEwyrc ").text
                 date_published = article.find("time")["datetime"]
                 source = article.find("a", class_="VDXfz").get("href")
-                content = article.find("div", class_="xrnccd").text
-                
+
+                # Insert the article into the database
+                cursor.execute(
+                    "INSERT INTO news_articles (title, author, date_published, source) VALUES (%s, %s, %s, %s)",
+                    (title, author, date_published, source),
+                )
+
+                # Commit the changes to the database
+                connection.commit()
+
+                # Print the article information
+                print(
+                    "Article title: ",
+                    title,
+                    "\nArticle author: ",
+                    author,
+                    "\nDate published: ",
+                    date_published,
+                    "\nSource: ",
+                    source,
+                )
 
     except Exception as e:
         print("Error occurred while scraping: ", e)
+
+    finally:
+        # Close the cursor
+        cursor.close()
+
+        # Close the connection
+        connection.close()
 
 
 # This function will scrape and store news articles from the specified URL
@@ -69,19 +95,27 @@ def scrape_and_store_news():
                 author = soup.find("span", class_="author-name").text
                 date_published = soup.find("span", class_="date").text
                 source = source_url
-                content = soup.find("div", class_="article-body").text
 
                 # Insert the article into the database
                 cursor.execute(
-                    "INSERT INTO news_articles (title, author, date_published, content, source) VALUES (%s, %s, %s, %s, %s)",
-                    (title, author, date_published, content, source),
+                    "INSERT INTO news_articles (title, author, date_published, source) VALUES (%s, %s, %s, %s)",
+                    (title, author, date_published, source),
                 )
 
                 # Commit the changes to the database
                 connection.commit()
 
                 # Print the article information
-                print(f"Error scraping and storing data from {source_name}: {str(e)}")
+                print(
+                    "Article title: ",
+                    title,
+                    "\nArticle author: ",
+                    author,
+                    "\nDate published: ",
+                    date_published,
+                    "\nSource: ",
+                    source,
+                )
 
         except Exception as e:
             print("Error occurred while scraping: ", e)
