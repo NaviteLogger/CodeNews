@@ -25,3 +25,13 @@ def scrape_and_store_news():
 
                 #Parse the response using BeautifulSoup
                 soup = BeautifulSoup(response.text, 'html.parser')
+
+                # Extract article information (customize as needed)
+                title = soup.find('h1', class_='article-title').text
+                author = soup.find('span', class_='author-name').text
+                date = soup.find('span', class_='date').text
+                content = soup.find('div', class_='article-body').text
+                source = source_url
+        
+        except Exception as e:
+            print("Error occurred while scraping: ", e)
