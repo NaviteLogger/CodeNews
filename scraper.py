@@ -29,9 +29,18 @@ def scrape_and_store_news():
                 # Extract article information (customize as needed)
                 title = soup.find('h1', class_='article-title').text
                 author = soup.find('span', class_='author-name').text
-                date = soup.find('span', class_='date').text
+                date_published = soup.find('span', class_='date').text
                 content = soup.find('div', class_='article-body').text
                 source = source_url
-        
+
+                # Insert the article into the database
+                cursor.execute("INSERT INTO news_articles (title, author, date_published, content, source) VALUES (%s, %s, %s, %s, %s)", (title, author, date_published, content, source))
+
+                # Commit the changes to the database
+                connection.commit()
+
+                # Print the article information
+                print(f"Error scraping and storing data from {source_name}: {str(e)}")                
+
         except Exception as e:
             print("Error occurred while scraping: ", e)
