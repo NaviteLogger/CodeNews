@@ -50,3 +50,7 @@ def scrape_and_store_news():
 
     #Close the connection
     connection.close()
+
+if __name__ == "__main__":
+    scrape_and_store_news()
+    print("Scraping completed successfully.")
