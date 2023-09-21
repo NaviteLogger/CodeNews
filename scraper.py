@@ -66,7 +66,7 @@ def scrape_and_store_google_news(user_id):
                         "\nDate published: ",
                         date_published,
                         "\nSource: ",
-                        source,
+                        article_url,
                     )
 
     except Exception as e:
