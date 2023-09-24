@@ -25,3 +25,6 @@ venv/
 
 #Environmental variables
 .env
+
+#Ignore the get-pip.py script
+get-pip.py
