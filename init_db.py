@@ -65,6 +65,11 @@ with open("user_preferences.txt", "r") as file:
         topics = parse_preferences(line)
         user_preferences.append(topics)
 
+# Insert the users' preferences into the database
+try:
+
+except Exception as e:
+    print("Error occurred while inserting the user preferences: ", e)
 
 # Commit changes, close the cursor and connection
 connection.commit()
