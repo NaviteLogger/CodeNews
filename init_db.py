@@ -54,13 +54,6 @@ except Exception as e:
 
 print("Database schema initialized successfully.")
 
-
-# Define a function that will parse a line of preferences into an array
-def parse_preferences(line):
-    preferences = line.split(",")
-    return preferences
-
-
 # Read the users' preferences from the text file into an array
 user_preferences = []
 
