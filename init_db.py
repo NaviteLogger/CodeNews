@@ -53,6 +53,9 @@ except Exception as e:
     print("Error occurred while initializing the database schema: ", e)
 
 finally:
+    # Commit the changes to the database
+    connection.commit()
+    
     # Close the cursor
     cursor.close()
 
