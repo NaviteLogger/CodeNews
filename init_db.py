@@ -17,6 +17,11 @@ def parse_preferences(line):
 # Read the users' preferences from the text file into an array
 user_preferences = []
 
+with open("user_preferences.txt", "r") as file:
+    for line in file:
+        topics = parse_preferences(line)
+        user_preferences.append(topics)
+
 try:
     # Create the 'news_articles' table
     create_news_articles_table_query = """
