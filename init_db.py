@@ -9,19 +9,6 @@ connection = mysql.connector.connect(**DB_CONFIG)
 # Create a cursor object
 cursor = connection.cursor()
 
-# Define a function that will parse a line of preferences into an array
-def parse_preferences(line):
-    preferences = line.split(",")
-    return preferences
-
-# Read the users' preferences from the text file into an array
-user_preferences = []
-
-with open("user_preferences.txt", "r") as file:
-    for line in file:
-        topics = parse_preferences(line)
-        user_preferences.append(topics)
-
 try:
     # Create the 'news_articles' table
     create_news_articles_table_query = """
@@ -64,6 +51,20 @@ try:
 
 except Exception as e:
     print("Error occurred while initializing the database schema: ", e)
+
+# Define a function that will parse a line of preferences into an array
+def parse_preferences(line):
+    preferences = line.split(",")
+    return preferences
+
+# Read the users' preferences from the text file into an array
+user_preferences = []
+
+with open("user_preferences.txt", "r") as file:
+    for line in file:
+        topics = parse_preferences(line)
+        user_preferences.append(topics)
+
 
 # Commit changes, close the cursor and connection
 connection.commit()
