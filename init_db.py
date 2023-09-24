@@ -80,7 +80,7 @@ try:
         INSERT INTO user_preferences (topic) VALUES (%s)
         """
 
-        cursor.execute(insert_user_preferences_query, (topic,))
+        cursor.execute(insert_user_preferences_query, (topic))
 
 except Exception as e:
     print("Error occurred while inserting the user preferences: ", e)
