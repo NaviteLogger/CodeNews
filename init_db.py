@@ -1,3 +1,5 @@
+#Make sure that before you run this script, the .env file db user can create tables in your database
+
 import mysql.connector
 from config import DB_CONFIG
 
@@ -34,6 +36,7 @@ try:
     # Execute the SQL statements to create the table
     cursor.execute(create_scrape_sources_urls_table_query)
 
+    # Create the 'user_preferences' table
     create_user_preferences_table_query = """
     CREATE TABLE IF NOT EXISTS user_preferences (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,6 +45,9 @@ try:
     language VARCHAR(255) NOT NULL,
     );
     """
+
+    # Execute the SQL statements to create the table
+    cursor.execute(create_user_preferences_table_query)
 
 except Exception as e:
     print("Error occurred while initializing the database schema: ", e)
