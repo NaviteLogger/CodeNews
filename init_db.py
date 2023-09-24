@@ -73,7 +73,10 @@ with open("user_preferences.txt", "r") as file:
 try:
     # Create a database connection
     connection = mysql.connector.connect(**DB_CONFIG)
-    
+
+    # Create a cursor object
+    cursor = connection.cursor()
+
     for preferences in user_preferences:
         # Extract topics from the users' preferences
         topic = preferences[0]
