@@ -9,6 +9,11 @@ connection = mysql.connector.connect(**DB_CONFIG)
 # Create a cursor object
 cursor = connection.cursor()
 
+# Define a function that will parse a line of preferences into an array
+def parse_preferences(line):
+    preferences = line.split(",")
+    return preferences
+
 try:
     # Create the 'news_articles' table
     create_news_articles_table_query = """
