@@ -59,8 +59,8 @@ user_preferences = []
 
 with open("user_preferences.txt", "r") as file:
     for line in file:
-        topics = parse_preferences(line)
-        user_preferences.append(topics)
+        topic = line.strip.split(", ")
+        user_preferences.append(topic)
 
 # Insert the users' preferences into the database
 try:
