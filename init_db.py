@@ -14,6 +14,9 @@ def parse_preferences(line):
     preferences = line.split(",")
     return preferences
 
+# Read the users' preferences from the text file into an array
+user_preferences = []
+
 try:
     # Create the 'news_articles' table
     create_news_articles_table_query = """
