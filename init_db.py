@@ -52,7 +52,14 @@ try:
 except Exception as e:
     print("Error occurred while initializing the database schema: ", e)
 
-print("Database schema initialized successfully.")
+finally:
+    # Close the cursor
+    cursor.close()
+
+    # Close the connection
+    connection.close()
+
+    print("Database schema initialized successfully.")
 
 # Read the users' preferences from the text file into an array
 user_preferences = []
@@ -64,6 +71,9 @@ with open("user_preferences.txt", "r") as file:
 
 # Insert the users' preferences into the database
 try:
+    # Create a database connection
+    connection = mysql.connector.connect(**DB_CONFIG)
+    
     for preferences in user_preferences:
         # Extract topics from the users' preferences
         topic = preferences[0]
