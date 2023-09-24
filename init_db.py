@@ -1,4 +1,4 @@
-#Make sure that before you run this script, the .env file db user can create tables in your database
+# Make sure that before you run this script, the .env file db user can create tables in your database
 
 import mysql.connector
 from config import DB_CONFIG
@@ -52,10 +52,14 @@ try:
 except Exception as e:
     print("Error occurred while initializing the database schema: ", e)
 
+print("Database schema initialized successfully.")
+
+
 # Define a function that will parse a line of preferences into an array
 def parse_preferences(line):
     preferences = line.split(",")
     return preferences
+
 
 # Read the users' preferences from the text file into an array
 user_preferences = []
@@ -67,13 +71,21 @@ with open("user_preferences.txt", "r") as file:
 
 # Insert the users' preferences into the database
 try:
+    for preferences in user_preferences:
+        # Extract topics from the users' preferences
+        topic = preferences[0]
+
+        # Insert topics into the user_preferences table
+        insert_user_preferences_query = """
+        INSERT INTO user_preferences (topic) VALUES (%s)
+        """
+
+        cursor.execute(insert_user_preferences_query, (topic,))
 
 except Exception as e:
     print("Error occurred while inserting the user preferences: ", e)
 
-# Commit changes, close the cursor and connection
+# Commit changes, close the cursor and the connection
 connection.commit()
 cursor.close()
 connection.close()
-
-print("Database schema initialized successfully.")
