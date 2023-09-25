@@ -95,7 +95,7 @@ try:
     # Insert the users' preferences into the database
     for user_id, user_preference in enumerate(user_preferences):
         for single_preference in user_preference:
-            print("Single preference: ", single_preference)
+            print(f'User ID: {user_id + 1}, Preference: {single_preference}')
 
             insert_user_preferences_query = """
             INSERT INTO user_preferences (user_id, topic)
