@@ -1,6 +1,6 @@
 # CodeNews: Programming Languages News Aggregator
 
-CodeNews is a Python-based project that provides a convenient way to stay up to date with the latest news, updates, and changes related to programming languages and technologies. It utilizes web scraping and personalized recommendations to deliver curated news articles based on your interests.
+CodeNews is a Python-based project that provides a convenient way to stay up to date with the latest news, updates, and changes related to programming languages and technologies. It utilizes web scraping and personalized recommendations to deliver news articles based on your interests.
 
 ## Table of Contents
 
