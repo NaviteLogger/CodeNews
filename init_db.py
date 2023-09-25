@@ -74,7 +74,7 @@ with open('user_preferences.txt', 'r') as file:
     lines = file_content.split("\n")
     print("Lines: ", lines)
 
-    for line in file:
+    for line in lines:
         topic = line.split(", ")
         print("Topic: ", topic)
         user_preferences.append(topic)
@@ -86,9 +86,6 @@ try:
 
     # Create a cursor object
     cursor = connection.cursor()
-
-    for preferences in user_preferences:
-        print(preferences)
 
 except Exception as e:
     print("Error occurred while inserting the user preferences: ", e)
