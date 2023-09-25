@@ -1,2 +1,2 @@
-JavaScript, "C#", Python
+JavaScript, C#, Python
 Java, C++, C#, Python

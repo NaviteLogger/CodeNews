@@ -69,8 +69,10 @@ user_preferences = []
 
 with open('user_preferences.txt', 'r') as file:
     file_content = file.read()
+    print(file_content)
 
     lines = file_content.split("\n")
+    print(lines)
 
     for line in file:
         topic = line.split(", ")
@@ -85,15 +87,7 @@ try:
     cursor = connection.cursor()
 
     for preferences in user_preferences:
-        # Extract topics from the users' preferences
-        topic = preferences[0]
-
-        # Insert topics into the user_preferences table
-        insert_user_preferences_query = """
-        INSERT INTO user_preferences (topic) VALUES (%s)
-        """
-
-        cursor.execute(insert_user_preferences_query, (topic))
+        print(preferences)
 
 except Exception as e:
     print("Error occurred while inserting the user preferences: ", e)
