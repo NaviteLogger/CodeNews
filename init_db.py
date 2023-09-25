@@ -93,16 +93,17 @@ try:
     cursor = connection.cursor()
 
     # Insert the users' preferences into the database
-    for user_preference in user_preferences:
+    for user_id, user_preference in enumerate(user_preferences):
         for single_preference in user_preference:
             print("Single preference: ", single_preference)
 
             insert_user_preferences_query = """
-            INSERT INTO user_preferences (user_id, topic, language) VALUES (%s, %s, %s);
+            INSERT INTO user_preferences (user_id, topic)
+            VALUES (%s, %s);
             """
 
-            # Execute the SQL statements to insert the users' preferences into the database
-            cursor.execute(insert_user_preferences_query, single_preference)
+            # Execute the SQL statements to insert the user preferences
+            cursor.execute(insert_user_preferences_query, (user_id + 1, single_preference))
 
 except Exception as e:
     print("Error occurred while inserting the user preferences: ", e)
