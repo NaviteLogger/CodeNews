@@ -79,6 +79,8 @@ with open('user_preferences.txt', 'r') as file:
         print("Topic: ", topic)
         user_preferences.append(topic)
 
+print("User preferences: ", user_preferences)
+
 # Insert the users' preferences into the database
 try:
     # Create a database connection
