@@ -3,18 +3,18 @@ from bs4 import BeautifulSoup
 import mysql.connector
 from config import DB_CONFIG
 
-
 # This function will scrape and store news articles from the Google News
 def scrape_and_store_google_news(user_id):
     # Google News URL
     google_news_url = "https://news.google.com"
 
-    try:
-        # Create a database connection
-        connection = mysql.connector.connect(**DB_CONFIG)
+    # Create a database connection
+    connection = mysql.connector.connect(**DB_CONFIG)
 
-        # Create a cursor - a middleware between the database and the application
-        cursor = connection.cursor()
+    # Create a cursor - a middleware between the database and the application
+    cursor = connection.cursor()
+
+    try:
 
         # Fetch the user's preferences from the database by user_id
         cursor.execute(
@@ -50,8 +50,11 @@ def scrape_and_store_google_news(user_id):
 
                     # Insert the article into the database
                     cursor.execute(
-                        "INSERT INTO news_articles (title, author, date_published, source) VALUES (%s, %s, %s, %s)",
-                        (title, author, date_published, article_url),
+                    """
+                    INSERT INTO news_articles (title, author, date_published, source)
+                    VALUES (%s, %s, %s, %s)
+                    """,
+                    (title, author, date_published, article_url),
                     )
 
                     # Commit the changes to the database
@@ -79,7 +82,6 @@ def scrape_and_store_google_news(user_id):
         # Close the connection
         connection.close()
 
-
 # This function will scrape and store news articles from the specified URL
 def scrape_and_store_news():
     # Create a database connection
@@ -93,13 +95,14 @@ def scrape_and_store_news():
     sources = cursor.fetchall()
 
     for source_name, source_url in sources:
+
         try:
             # Send a HTTP GET request to the URL
             response = requests.get(source_url)
             print("The HTTP GET request status is: ", response.status_code)
 
             # Check if the request was successful
-            if response.status == 200:
+            if response.status_code == 200:
                 # Parse the response using BeautifulSoup
                 soup = BeautifulSoup(response.text, "html.parser")
 
@@ -111,8 +114,11 @@ def scrape_and_store_news():
 
                 # Insert the article into the database
                 cursor.execute(
-                    "INSERT INTO news_articles (title, author, date_published, source) VALUES (%s, %s, %s, %s)",
-                    (title, author, date_published, source),
+                """
+                INSERT INTO news_articles (title, author, date_published, source)
+                VALUES (%s, %s, %s, %s)
+                """,
+                (title, author, date_published, source),
                 )
 
                 # Commit the changes to the database
@@ -133,11 +139,12 @@ def scrape_and_store_news():
         except Exception as e:
             print("Error occurred while scraping: ", e)
 
-    # Close the cursor
-    cursor.close()
+        finally:
+            # Close the cursor
+            cursor.close()
 
-    # Close the connection
-    connection.close()
+            # Close the connection
+            connection.close()
 
 if __name__ == "__main__":
     scrape_and_store_google_news()
