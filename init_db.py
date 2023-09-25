@@ -55,7 +55,7 @@ except Exception as e:
 finally:
     # Commit the changes to the database
     connection.commit()
-    
+
     # Close the cursor
     cursor.close()
 
@@ -67,7 +67,7 @@ finally:
 # Read the users' preferences from the text file into an array
 user_preferences = []
 
-with open('user_preferences.txt', 'r') as file:
+with open("user_preferences.txt", "r") as file:
     file_content = file.read()
     print("File content: ", file_content)
 
@@ -81,6 +81,9 @@ with open('user_preferences.txt', 'r') as file:
 
 print("User preferences: ", user_preferences)
 
+for user_preference in user_preferences:
+    print("User preference: ", user_preference)
+
 # Insert the users' preferences into the database
 try:
     # Create a database connection
@@ -88,6 +91,18 @@ try:
 
     # Create a cursor object
     cursor = connection.cursor()
+
+    # Insert the users' preferences into the database
+    for user_preference in user_preferences:
+        for single_preference in user_preference:
+            print("Single preference: ", single_preference)
+
+            insert_user_preferences_query = """
+            INSERT INTO user_preferences (user_id, topic, language) VALUES (%s, %s, %s);
+            """
+
+            # Execute the SQL statements to insert the users' preferences into the database
+            cursor.execute(insert_user_preferences_query, single_preference)
 
 except Exception as e:
     print("Error occurred while inserting the user preferences: ", e)
