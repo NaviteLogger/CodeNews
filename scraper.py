@@ -20,13 +20,17 @@ def scrape_and_store_google_news(user_id):
     try:
 
         print("The user id is: ", user_id)
-        print("Selecting user preferences for the database..."
+        print("Selecting user preferences for the database...")
         # Fetch the user's preferences from the database by user_id
         cursor.execute(
-            "SELECT topic, language FROM user_preferences WHERE user_id = %s",
-            (user_id,),
+            """
+            SELECT topic, language FROM user_preferences WHERE user_id = %s"
+            """,
+            (user_id)
         )
+
         user_preferences = cursor.fetchall()
+        print("The user preferences are: ", user_preferences)
 
         for topic, language in user_preferences:
             # Customize the Google News URL based on the user's preferences
