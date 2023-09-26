@@ -147,5 +147,9 @@ def scrape_and_store_news():
             connection.close()
 
 if __name__ == "__main__":
-    scrape_and_store_google_news()
+
+    # Scrape and store news articles from the specified URL
+    user_id = 1
+
+    scrape_and_store_google_news(user_id)
     print("Scraping completed successfully.")
