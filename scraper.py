@@ -24,9 +24,9 @@ def scrape_and_store_google_news(user_id):
         # Fetch the user's preferences from the database by user_id
         cursor.execute(
             """
-            SELECT topic, language FROM user_preferences WHERE user_id = %s"
+            SELECT topic, language FROM user_preferences WHERE user_id = %s
             """,
-            (user_id)
+            (user_id,) 
         )
 
         user_preferences = cursor.fetchall()
@@ -35,9 +35,11 @@ def scrape_and_store_google_news(user_id):
         for topic, language in user_preferences:
             # Customize the Google News URL based on the user's preferences
             google_news_topic_url = f"{google_news_url}/topics/{topic}?hl={language}"
+            print("The Google News URL is: ", google_news_topic_url)
 
             # Send a HTTP GET request to the Google News URL
             response = requests.get(google_news_topic_url)
+            print("The HTTP GET request status is: ", response.status_code)
 
             # Check if the request was successful
             if response.status_code == 200:
@@ -161,4 +163,3 @@ if __name__ == "__main__":
     user_id = 1
 
     scrape_and_store_google_news(user_id)
-    print("Scraping completed successfully.")
