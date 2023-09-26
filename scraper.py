@@ -34,7 +34,7 @@ def scrape_and_store_google_news(user_id):
 
         for topic, language in user_preferences:
             # Customize the Google News URL based on the user's preferences
-            google_news_topic_url = f"{google_news_url}/search?q={topic}&hl={language}"
+            google_news_topic_url = f"{google_news_url}/search?q={topic}&hl={language}&gl={language.upper()}"
             print("The Google News URL is: ", google_news_topic_url)
 
             # Send a HTTP GET request to the Google News URL
