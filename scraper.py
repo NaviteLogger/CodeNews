@@ -5,17 +5,22 @@ from config import DB_CONFIG
 
 # This function will scrape and store news articles from the Google News
 def scrape_and_store_google_news(user_id):
+    print("Scraping Google News...")
+
     # Google News URL
     google_news_url = "https://news.google.com"
 
     # Create a database connection
     connection = mysql.connector.connect(**DB_CONFIG)
+    print("The established database connection is: ", connection)
 
     # Create a cursor - a middleware between the database and the application
     cursor = connection.cursor()
 
     try:
 
+        print("The user id is: ", user_id)
+        print("Selecting user preferences for the database..."
         # Fetch the user's preferences from the database by user_id
         cursor.execute(
             "SELECT topic, language FROM user_preferences WHERE user_id = %s",
